@@ -1,5 +1,3 @@
-//git test
-
 const todos = getSavedTodos();
 
 const filters = {
