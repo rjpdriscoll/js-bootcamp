@@ -10,7 +10,7 @@ let note = notes.find(function (note) {
 });
 
 if (note === undefined) {
-    location.assign('/js-bootcamp/notes-app/index.html');
+    location.assign('/notes-app/index.html');
 };
 
 
@@ -34,7 +34,7 @@ noteBodySelected.addEventListener('input', function (e) {
 buttonSelected.addEventListener('click', function () {
     removeNote(note.id);
     saveNotes(notes);
-    location.assign('/js-bootcamp/notes-app/index.html');
+    location.assign('/notes-app/index.html');
 });
 
 window.addEventListener('storage', function (e) {
@@ -45,7 +45,7 @@ window.addEventListener('storage', function (e) {
         });
         
         if (note === undefined) {
-            location.assign('/js-bootcamp/notes-app/index.html');
+            location.assign('/notes-app/index.html');
         };
         
         noteTitleSelected.value = note.title;

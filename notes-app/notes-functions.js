@@ -47,7 +47,7 @@ const generateNoteDOM = function (note) {
         textElement.textContent = 'Unnamed note';
     };
     
-    textElement.setAttribute('href', `/js-bootcamp/notes-app/edit.html#${note.id}`);
+    textElement.setAttribute('href', `/notes-app/edit.html#${note.id}`);
     noteElement.appendChild(textElement);
     
     return noteElement;

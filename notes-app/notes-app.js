@@ -12,7 +12,7 @@ document.querySelector('#create-note').addEventListener('click', function (e) {
     const id = uuidv4();
     notes.push({id: id, title: '', body: ''});
     saveNotes(notes);
-    location.assign(`/js-bootcamp/notes-app/edit.html#${id}`);
+    location.assign(`/notes-app/edit.html#${id}`);
 });
 
 // Filter notes on search text
