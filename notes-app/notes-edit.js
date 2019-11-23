@@ -4,6 +4,7 @@ let notes = getSavedNotes();
 const noteTitleSelected = document.querySelector('#note-title');
 const noteBodySelected = document.querySelector('#note-body');
 const buttonSelected = document.querySelector('#remove-note');
+const lastEdited = document.querySelector('#last-edited');
 
 let note = notes.find(function (note) {
     return note.id === noteId;
@@ -17,16 +18,21 @@ if (note === undefined) {
 // Loads note with existing title and body
 noteTitleSelected.value = note.title;
 noteBodySelected.value = note.body;
+lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
 
 // Listens for note title update
 noteTitleSelected.addEventListener('input', function (e) {
     note.title = e.target.value;
+    note.updatedAt = moment().valueOf();
+    lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
     saveNotes(notes);
 });
 
 // Listens for note body update
 noteBodySelected.addEventListener('input', function (e) {
     note.body = e.target.value;
+    note.updatedAt = moment().valueOf();
+    lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
     saveNotes(notes);
 });
 
@@ -50,5 +56,6 @@ window.addEventListener('storage', function (e) {
         
         noteTitleSelected.value = note.title;
         noteBodySelected.value = note.body;
+        lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
     };
 });
