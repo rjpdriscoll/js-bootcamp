@@ -81,7 +81,7 @@ const renderTodos = (todos, filters) => {
     });
 
     // Array of incomplete todo items
-    const incompleteTodos = filteredTodos.filter( (todo) => !todo.completed);
+    const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
     // Clear todos div
     document.querySelector('#todos').innerHTML = '';
@@ -90,7 +90,7 @@ const renderTodos = (todos, filters) => {
     document.querySelector('#todos').appendChild(getSummaryDOM(incompleteTodos));
 
     // Display todo list on the screen
-    filteredTodos.forEach( (todo) => {
+    filteredTodos.forEach((todo) => {
         document.querySelector('#todos').appendChild(generateTodoDOM(todo));
     });
 };
