@@ -6,9 +6,8 @@ const noteBodySelected = document.querySelector('#note-body');
 const buttonSelected = document.querySelector('#remove-note');
 const lastEdited = document.querySelector('#last-edited');
 
-let note = notes.find(function (note) {
-    return note.id === noteId;
-});
+let note = notes.find( (note) =>  note.id === noteId);
+
 
 if (note === undefined) {
     location.assign('/notes-app/index.html');
@@ -21,7 +20,7 @@ noteBodySelected.value = note.body;
 lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
 
 // Listens for note title update
-noteTitleSelected.addEventListener('input', function (e) {
+noteTitleSelected.addEventListener('input', (e) => {
     note.title = e.target.value;
     note.updatedAt = moment().valueOf();
     lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
@@ -29,7 +28,7 @@ noteTitleSelected.addEventListener('input', function (e) {
 });
 
 // Listens for note body update
-noteBodySelected.addEventListener('input', function (e) {
+noteBodySelected.addEventListener('input', (e) => {
     note.body = e.target.value;
     note.updatedAt = moment().valueOf();
     lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
@@ -37,18 +36,16 @@ noteBodySelected.addEventListener('input', function (e) {
 });
 
 // Wires up remove note button
-buttonSelected.addEventListener('click', function () {
+buttonSelected.addEventListener('click', () => {
     removeNote(note.id);
     saveNotes(notes);
     location.assign('/notes-app/index.html');
 });
 
-window.addEventListener('storage', function (e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue);
-        let note = notes.find(function (note) {
-            return note.id === noteId;
-        });
+        let note = notes.find( (note) => note.id === noteId);
         
         if (note === undefined) {
             location.assign('/notes-app/index.html');
