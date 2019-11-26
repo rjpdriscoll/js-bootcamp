@@ -1,7 +1,7 @@
 // Read/parse data on startup
 const getSavedTodos = () => {
     const todosJSON = localStorage.getItem('todos');
-    return todosJSON !== null ? JSON.parse(todosJSON) : [];
+    return todosJSON ? JSON.parse(todosJSON) : [];
 };
 
 // Save todos to local storage
@@ -11,7 +11,7 @@ const saveTodos = (todos) => {
 
 // Remove a todo from the page
 const removeTodo = (id) => {
-    const todoIndex = todos.findIndex( (todo) => todo.id === id);
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
 
     if (todoIndex > -1) {
         return todos.splice(todoIndex, 1);
@@ -20,9 +20,9 @@ const removeTodo = (id) => {
 
 // Complete a task
 const toggleTodo = (id) => {
-    const todo = todos.find( (todo) => todo.id === id);
+    const todo = todos.find((todo) => todo.id === id);
 
-    if (todo !== undefined) {
+    if (todo) {
         todo.completed = !todo.completed;
     };
 };
@@ -69,10 +69,10 @@ const generateTodoDOM = (todo) => {
 
 // Render todos to the page
 const renderTodos = (todos, filters) => {
-    let filteredTodos = todos.filter( (todo) => todo.text.toLowerCase().includes(filters.searchText.toLowerCase()));
+    let filteredTodos = todos.filter((todo) => todo.text.toLowerCase().includes(filters.searchText.toLowerCase()));
 
     // Remove completed from screen
-    filteredTodos = filteredTodos.filter( (todo) => {
+    filteredTodos = filteredTodos.filter((todo) => {
         if (filters.hideCompleted) {
             return !todo.completed;
         } else {

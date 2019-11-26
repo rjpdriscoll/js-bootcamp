@@ -6,10 +6,10 @@ const noteBodySelected = document.querySelector('#note-body');
 const buttonSelected = document.querySelector('#remove-note');
 const lastEdited = document.querySelector('#last-edited');
 
-let note = notes.find( (note) =>  note.id === noteId);
+let note = notes.find((note) =>  note.id === noteId);
 
 
-if (note === undefined) {
+if (!note) {
     location.assign('/notes-app/index.html');
 };
 
@@ -45,9 +45,9 @@ buttonSelected.addEventListener('click', () => {
 window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue);
-        let note = notes.find( (note) => note.id === noteId);
+        let note = notes.find((note) => note.id === noteId);
         
-        if (note === undefined) {
+        if (!note) {
             location.assign('/notes-app/index.html');
         };
         

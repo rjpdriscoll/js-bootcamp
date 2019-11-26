@@ -1,7 +1,7 @@
 // Read existing notes from local storage
 const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes');
-    return notesJSON !== null ? JSON.parse(notesJSON) : [];
+    return notesJSON ? JSON.parse(notesJSON) : [];
 };
 
 // Save the notes to local storage
@@ -85,7 +85,7 @@ const sortNotes = (notes, sortBy) => {
 // Render notes to the page
 const renderNotes = (notes, filters) => {
     notes = sortNotes(notes, filters.sortBy);
-    const filteredNotes = notes.filter( (note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()));
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()));
 
     document.querySelector('#notes').innerHTML = '';
 
