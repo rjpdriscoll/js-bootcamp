@@ -2,6 +2,7 @@ const Hangman = function (word, numOfGuesses) {
     this.word = word.toLowerCase().split('');
     this.guessedLetters = [];
     this.guessesLeft = numOfGuesses;
+    this.status = 'playing';
 }
 
 Hangman.prototype.getPuzzle = function () {
@@ -23,6 +24,10 @@ Hangman.prototype.getGuess = function (guess) {
     const isUnique = !this.guessedLetters.includes(guess);
     const isBadGuess = !this.word.includes(guess);
 
+    if (this.status !== 'playing') {
+        return
+    }
+
     if (isUnique && !isBadGuess) {
         this.guessedLetters.push(guess);
     } else if (isUnique && isBadGuess) {
@@ -31,16 +36,36 @@ Hangman.prototype.getGuess = function (guess) {
     } else if (this.guessedLetters.includes(guess)) {
         console.log('You\'ve already guessed that letter!');
     }
+
+    this.getStatus();
 }
 
+Hangman.prototype.getStatus = function () {
+    let finished = true;
 
-const game1 = new Hangman('cat', 2);
-console.log(game1.getPuzzle()); // c*t
-console.log(game1.guessesLeft);
+    this.word.forEach((letter) => {
+        if (this.guessedLetters.includes(letter)) {
+            
+        } else {
+            finished = false;
+        }
+    })
+    
+    if (this.guessesLeft <= 0) {
+        this.status = 'failed';
+    } else if (finished) {
+        this.status = 'finished';
+    } else {
+        this.status = 'playing';
+    }
+}
 
-window.addEventListener('keypress', function (e) {
-    const guess = String.fromCharCode(e.charCode);
-    game1.getGuess(guess);
-    console.log(game1.getPuzzle()); // c*t
-    console.log(game1.guessesLeft);
-})
+Hangman.prototype.statusMessage = function () {
+    if (this.status === 'playing') {
+        return `Guesses left: ${this.guessesLeft}`;
+    } else if (this.status === 'failed') {
+        return `Nice try! The word was "${this.word.join('')}".`;
+    } else {
+        return 'Great work! You guessed the word.';
+    }
+}

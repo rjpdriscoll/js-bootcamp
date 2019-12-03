@@ -7,8 +7,16 @@
 // Number prototype chain: myNumber --> Number.prototype --> Object.prototype --> null
 // Boolean prototype chain: myBoolean --> Boolean.prototype --> Object.prototype --> null
 
-const product = 'Computer';
-console.log(product);
+const puzzleEl = document.querySelector('#puzzle');
+const guessesEl = document.querySelector('#guesses');
+const game1 = new Hangman('cat', 2);
 
-const otherProduct = new String('Phone');
-console.log(otherProduct);
+puzzleEl.textContent = game1.getPuzzle();
+guessesEl.textContent = game1.statusMessage();
+
+window.addEventListener('keypress', function (e) {
+    const guess = String.fromCharCode(e.charCode);
+    game1.getGuess(guess);
+    puzzleEl.textContent = game1.getPuzzle();
+    guessesEl.textContent = game1.statusMessage();
+})
