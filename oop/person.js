@@ -1,5 +1,5 @@
 // Prototypal Inheritance
-
+// myPerson --> Person.prototype --> Object.prototype --> null
 
 // Class Syntax
 
@@ -27,12 +27,38 @@ class Person {
     }
 }
 
-const myPerson = new Person('Ryan', 'Driscoll', 26, ['Coding']);
-console.log(myPerson);
+class Employee extends Person {
+    constructor(firstName, lastName, age, position, likes = []) {
+        super(firstName, lastName, age, likes);
+        this.position = position;
+    }
+    getBio() {
+        return `${this.firstName} ${this.lastName} is a ${this.position}.`;     
+    }
+    getYearsLeft() {
+        return 65 - this.age;
+    }
 
-const me = new Person('Ryan', 'Driscoll', 26, ['Call of Duty', 'Tesla']);
-me.setName('Dominic James');
+}
+
+class Student extends Person {
+    constructor(firstName, lastName, age, grade, likes = []) {
+        super(firstName, lastName, age, likes);
+        this.grade = grade;
+    }
+    getBio() {
+        if (this.grade >= 70) {
+            return `${this.firstName} is passing the class!`;
+        } else {
+            return `${this.firstName} is failing the class.`;
+        }
+    }
+    updateGrade(amount) {
+        this.grade += amount;
+    }
+}
+
+const me = new Student('Ryan', 'Driscoll', 26, 93, ['coding', 'dogs', 'wife']);
 console.log(me.getBio());
-
-const personTwo = new Person('Andrew', 'Mead', 27);
-console.log(personTwo.getBio());
+me.updateGrade(-45);
+console.log(me.getBio());
