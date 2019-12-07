@@ -9,14 +9,14 @@
 
 const puzzleEl = document.querySelector('#puzzle');
 const guessesEl = document.querySelector('#guesses');
-const game1 = new Hangman('cat', 2);
+const game1 = new Hangman('car part store', 4);
 
-puzzleEl.textContent = game1.getPuzzle();
-guessesEl.textContent = game1.statusMessage();
+puzzleEl.textContent = game1.puzzle;
+guessesEl.textContent = game1.statusMessage;
 
 window.addEventListener('keypress', function (e) {
     const guess = String.fromCharCode(e.charCode);
     game1.getGuess(guess);
-    puzzleEl.textContent = game1.getPuzzle();
-    guessesEl.textContent = game1.statusMessage();
+    puzzleEl.textContent = game1.puzzle;
+    guessesEl.textContent = game1.statusMessage;
 })
