@@ -27,14 +27,20 @@ window.addEventListener('keypress', (e) => {
 
 getPuzzle('2').then((puzzle) => {
     console.log(puzzle);
-}, (err) => {
-    console.log(`Error: ${err}`)
-});
+}).catch((err) => {
+    console.log(`Error: ${err}`);
+})
 
+getCountry('MX').then((country) => {
+    console.log(`Country's full name: ${country.name}`);
+}).catch((err) => {
+    console.log(`There was an error: ${err}`);
+})
 
-// // Making an HTTP request
-getCountry('US').then((countryName) => {
-    console.log(`Country's full name: ${countryName}`);
-}, (err) => {
+getLocation().then((location) => {
+    return getCountry(location.country)
+}).then((country) => {
+    console.log(country.name);
+}).catch((err) => {
     console.log(`There was an error: ${err}`);
 })
