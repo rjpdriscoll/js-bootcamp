@@ -19,13 +19,13 @@ if (!note) {
 // Loads note with existing title and body
 noteTitleSelected.value = note.title;
 noteBodySelected.value = note.body;
-lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
+lastEdited.textContent = generateLastEdited();
 
 // Listens for note title update
 noteTitleSelected.addEventListener('input', (e) => {
     note.title = e.target.value;
     note.updatedAt = moment().valueOf();
-    lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
+    lastEdited.textContent = generateLastEdited();
     saveNotes(notes);
 });
 
@@ -33,7 +33,7 @@ noteTitleSelected.addEventListener('input', (e) => {
 noteBodySelected.addEventListener('input', (e) => {
     note.body = e.target.value;
     note.updatedAt = moment().valueOf();
-    lastEdited.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
+    lastEdited.textContent = generateLastEdited();
     saveNotes(notes);
 });
 
