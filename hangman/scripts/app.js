@@ -22,8 +22,15 @@ window.addEventListener('keypress', (e) => {
 })
 
 const render = () => {
-    puzzleEl.textContent = game1.puzzle;
+    puzzleEl.innerHTML = '';
     guessesEl.textContent = game1.statusMessage;
+
+    const puzzleArray = game1.puzzle.split('');
+    puzzleArray.forEach((letter) => {
+        const puzzleLetter = document.createElement('span');
+        puzzleLetter.textContent = letter;
+        puzzleEl.appendChild(puzzleLetter);
+    })
 }
 
 const startGame = async () => {
